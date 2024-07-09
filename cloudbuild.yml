@@ -1,21 +1,20 @@
 steps:
-- name: 'gcr.io/cloud-builders/docker'
-  entrypoint: 'bash'
-  args:
-    - -c
-    - |
-      docker build -t europe-southwest1-docker.pkg.dev/manifest-access-428916-p6/image-registry/orders-ms -f dockerfile.prod --platform=linux/amd64 --build-arg ORDERS_DATABASE_URL=$$DATABASE_URL .
-  secretEnv: ['DATABASE_URL']
-
-- name: 'gcr.io/cloud-builders/docker'
-  args:
-    [
-      'push',
-      'europe-southwest1-docker.pkg.dev/manifest-access-428916-p6/image-registry/orders-ms',
-    ]
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - -c
+      - |
+        docker build -t europe-southwest1-docker.pkg.dev/manifest-access-428916-p6/image-registry/orders-ms -f dockerfile.prod --platform=linux/amd64 --build-arg ORDERS_DATABASE_URL=$$DATABASE_URL .
+    secretEnv: ['DATABASE_URL']
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'push',
+        'europe-southwest1-docker.pkg.dev/manifest-access-428916-p6/image-registry/orders-ms',
+      ]
+options:
+  logging: CLOUD_LOGGING_ONLY
 availableSecrets:
   secretManager:
   - versionName: projects/435768100971/secrets/ORDERS_MS_DATABASE/versions/1
     env: 'DATABASE_URL'
-options:
-  logging: CLOUD_LOGGING_ONLY
