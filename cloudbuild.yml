@@ -17,4 +17,4 @@ options:
 availableSecrets:
   secretManager:
   - versionName: projects/435768100971/secrets/ORDERS_MS_DATABASE/versions/1
-    env: 'DATABASE_URL'
+    env: 'ORDERS_MS_DATABASE'
