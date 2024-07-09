@@ -16,6 +16,8 @@ FROM node:21-alpine3.19 as builder
 ARG ORDERS_MS_DATABASE
 ENV DATABASE_URL=$ORDERS_MS_DATABASE
 
+RUN echo "database_url" ::: $ORDERS_MS_DATABASE
+
 
 WORKDIR /usr/src/app
 
